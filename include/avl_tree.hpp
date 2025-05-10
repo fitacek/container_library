@@ -27,6 +27,7 @@ private:
         std::unique_ptr<Node> left;
         std::unique_ptr<Node> right;
         std::unique_ptr<Node> parrent;
+        Node(int key, int value) : key(key), value(value) {}
     };
     std::unique_ptr<Node> root;
     size_t nodeCount = 0;
