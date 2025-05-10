@@ -44,7 +44,7 @@ bool AVLTree::insert(const int key, const int value)
         }
     }
     // head == nullptr
-    // tail == parrent of head
+    // tail == parrent of head (never nullptr)
     if (key < tail->key)
     {
         // insert new node to left
@@ -57,24 +57,26 @@ bool AVLTree::insert(const int key, const int value)
     }
     nodeCount++;
     // node is inserted, now there may be need to rebalance the tree
+
     return true;
 }
 
-void AVLTree::printInOrder() const{
-    std::cout<<"Print inOrder:\n";
+void AVLTree::printInOrder() const
+{
+    std::cout << "Print inOrder:\n";
     printInOrderInternal(root.get());
-    std::cout<<"\n";
+    std::cout << "\n";
 }
 
-void AVLTree::printInOrderInternal(Node * node) const{
+void AVLTree::printInOrderInternal(Node *node) const
+{
     if (!node)
         return;
     printInOrderInternal(node->left.get());
-    //std::cout<<node->key<<" ";
+    // std::cout<<node->key<<" ";
     node->print();
     printInOrderInternal(node->right.get());
 };
-    
 
 AVLTree::Node::Node(int key, int value, Node *parrent) : key(key), value(value), parrent(parrent) {}
 
@@ -91,7 +93,8 @@ void AVLTree::Node::print() const
               << "rightChild= " << (right != nullptr ? std::to_string(right->key) : "n") << std::endl;
 }
 
-std::optional<int> AVLTree::find(const int key) const{
+std::optional<int> AVLTree::find(const int key) const
+{
     Node *head = root.get();
     Node *tail = nullptr;
 
@@ -120,48 +123,55 @@ std::optional<int> AVLTree::find(const int key) const{
     return std::nullopt;
 }
 
-void AVLTree::clear(){
+void AVLTree::clear()
+{
     root.reset();
     nodeCount = 0;
 }
 
-
-void AVLTree::rotateLeft(Node * node){
+void AVLTree::rotateLeft(Node *node)
+{
     // node is Node with weigth: -2
-    Node* parrent = node->parrent; // parrent of node
-  
+    Node *parrent = node->parrent; // parrent of node
+
     auto rightSubTree = std::move(node->right); // should never be nullptr
     rightSubTree->parrent = node->parrent;
-    
+
     node->deltaDepth = 0;
     rightSubTree->deltaDepth = 0;
 
     node->right = std::move(rightSubTree->left);
     node->parrent = rightSubTree.get();
 
-    if (!rightSubTree->right)
+    if (rightSubTree->right != nullptr)
         rightSubTree->right->parrent = rightSubTree.get();
 
-    if (node->parrent != nullptr){
+    if (node->parrent != nullptr)
+    {
         // need to idetify if node is left or right child of the parrent
-        if (parrent->left.get() == node){ // node is left child
+        if (parrent->left.get() == node)
+        { // node is left child
             rightSubTree->left = std::move(parrent->left);
             parrent->left = std::move(rightSubTree);
-        }else { // node is right child
-                rightSubTree->left = std::move(parrent->right);
-                parrent->right = std::move(rightSubTree);
         }
-    } else {
+        else
+        { // node is right child
+            rightSubTree->left = std::move(parrent->right);
+            parrent->right = std::move(rightSubTree);
+        }
+    }
+    else
+    {
         // node was root, therefore had no parrent
         rightSubTree->left = std::move(root);
         root = std::move(rightSubTree); // root has changed. Y is the new root
     }
 
     // set parrents
-    if (!node->left)
+    if (node->left != nullptr)
         node->left->parrent = node;
-    
-    if (!node->right)
+
+    if (node->right != nullptr)
         node->right->parrent = node;
 }
 
@@ -177,4 +187,30 @@ void AVLTree::rotateLeft(Node * node){
 
 // }
 
- 
+void AVLTree::propagateUpDepthChange(Node *newNode)
+{
+    if (newNode->parrent != nullptr)
+    {
+        if (newNode->parrent->left != nullptr && newNode->parrent->right != nullptr)
+        {
+            // node already had a child, deltaDepth will be 0
+            newNode->parrent->deltaDepth = 0;
+            return;
+        }
+        else
+        {
+            // deltaDepth changed by +/-1
+            // left or right child?
+            if (newNode->parrent->left.get() == newNode)
+            { // left child
+                newNode->parrent->deltaDepth -= 1;
+            }
+            else
+            { // right child
+                newNode->parrent->deltaDepth += 1;
+            }
+        }
+    }
+
+    // Node *head =
+}
