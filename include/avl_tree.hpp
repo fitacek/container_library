@@ -45,9 +45,9 @@ private:
 
     void printInOrderInternal(Node * node) const;
 
-    static void rotateLeft(Node * node);
-    static void rotateRight(Node * node);
-    static void rotateLeftRight(Node * node);
-    static void rotateRightLeft(Node * node);
+    void rotateLeft(Node * node);
+    // void rotateRight(Node * node);
+    // void rotateLeftRight(Node * node);
+    // void rotateRightLeft(Node * node);
 
 };
