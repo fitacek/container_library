@@ -90,3 +90,32 @@ void AVLTree::Node::print() const
               << "leftChild= " << (left != nullptr ? std::to_string(left->key) : "n") << ", "
               << "rightChild= " << (right != nullptr ? std::to_string(right->key) : "n") << std::endl;
 }
+
+std::optional<int> AVLTree::find(const int key) const{
+    Node *head = root.get();
+    Node *tail = nullptr;
+
+    while (head != nullptr)
+    {
+        tail = head;
+        if (key < head->key)
+        {
+            // go left
+            head = head->left.get();
+        }
+        else if (key > head->key)
+        {
+            // go right
+            head = head->right.get();
+        }
+        else
+        {
+            // key found, return the value
+            return tail->value;
+        }
+    }
+    // head == nullptr
+    // tail == parrent of head
+    // key not found, return empty optional
+    return std::nullopt;
+}
