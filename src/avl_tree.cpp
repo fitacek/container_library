@@ -1,5 +1,5 @@
 #include "avl_tree.hpp"
-
+#include <iostream>
 AVLTree::AVLTree() {}
 
 size_t AVLTree::size() const
@@ -60,9 +60,33 @@ bool AVLTree::insert(const int key, const int value)
     return true;
 }
 
+void AVLTree::printInOrder() const{
+    std::cout<<"Print inOrder:\n";
+    printInOrderInternal(root.get());
+    std::cout<<"\n";
+}
+
+void AVLTree::printInOrderInternal(Node * node) const{
+    if (!node)
+        return;
+    printInOrderInternal(node->left.get());
+    //std::cout<<node->key<<" ";
+    node->print();
+    printInOrderInternal(node->right.get());
+};
+    
+
 AVLTree::Node::Node(int key, int value, Node *parrent) : key(key), value(value), parrent(parrent) {}
 
 bool AVLTree::Node::isLeaf() const
 {
     return left == nullptr && right == nullptr;
+}
+
+void AVLTree::Node::print() const
+{
+    std::cout << "key= " << key << ", "
+              << "parent= " << (parrent != nullptr ? std::to_string(parrent->key) : "n") << ", "
+              << "leftChild= " << (left != nullptr ? std::to_string(left->key) : "n") << ", "
+              << "rightChild= " << (right != nullptr ? std::to_string(right->key) : "n") << std::endl;
 }
