@@ -57,6 +57,7 @@ bool AVLTree::insert(const int key, const int value)
     }
     nodeCount++;
     // node is inserted, now there may be need to rebalance the tree
+    return true;
 }
 
 AVLTree::Node::Node(int key, int value, Node *parrent) : key(key), value(value), parrent(parrent) {}
