@@ -119,3 +119,9 @@ std::optional<int> AVLTree::find(const int key) const{
     // key not found, return empty optional
     return std::nullopt;
 }
+
+void AVLTree::clear(){
+    root.reset();
+    nodeCount = 0;
+}
+
