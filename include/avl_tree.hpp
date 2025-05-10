@@ -21,6 +21,7 @@ public:
     size_t size() const;
     void clear();
 
+    void printInOrder() const;
 private:
     struct Node
     {
@@ -32,7 +33,11 @@ private:
 
         Node(int key, int value, Node *parrent = nullptr);
         bool isLeaf() const;
+
+        void print() const;
     };
     std::unique_ptr<Node> root;
     size_t nodeCount = 0;
+
+    void printInOrderInternal(Node * node) const;
 };
