@@ -55,7 +55,7 @@ bool AVLTree::insert(const int key, const int value)
         // insert new node to right
         tail->right = std::make_unique<Node>(key, value, tail);
     }
-
+    nodeCount++;
     // node is inserted, now there may be need to rebalance the tree
 }
 
