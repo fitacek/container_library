@@ -21,6 +21,7 @@ public:
     void clear();
 
     void printInOrder() const;
+
 private:
     struct Node
     {
@@ -29,8 +30,10 @@ private:
         std::unique_ptr<Node> left;
         std::unique_ptr<Node> right;
         Node *parrent = nullptr; // using raw pointer here because unique_ptr cannot be copied. shared_ptr has RC overhead and observer_ptr is c++23 feature
-        size_t depthLeft = 0; // depth of left subtree
-        size_t depthRight = 0; // depth of right subtree
+        
+        //size_t depthLeft = 0; // depth of left subtree
+        //size_t depthRight = 0; // depth of right subtree
+        int deltaDepth = 0;
 
         Node(int key, int value, Node *parrent = nullptr);
         bool isLeaf() const;
@@ -41,4 +44,10 @@ private:
     size_t nodeCount = 0;
 
     void printInOrderInternal(Node * node) const;
+
+    static void rotateLeft(Node * node);
+    static void rotateRight(Node * node);
+    static void rotateLeftRight(Node * node);
+    static void rotateRightLeft(Node * node);
+
 };

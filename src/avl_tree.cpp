@@ -125,3 +125,21 @@ void AVLTree::clear(){
     nodeCount = 0;
 }
 
+
+void AVLTree::rotateLeft(Node * node){
+    // node is Node with weigth -2
+
+}
+
+void AVLTree::rotateRight(Node * node){
+
+}
+
+void AVLTree::rotateLeftRight(Node * node){
+
+}
+
+void AVLTree::rotateRightLeft(Node * node){
+
+}
+
