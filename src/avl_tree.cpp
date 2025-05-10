@@ -132,13 +132,16 @@ void AVLTree::rotateLeft(Node * node){
   
     auto rightSubTree = std::move(node->right); // should never be nullptr
     rightSubTree->parrent = node->parrent;
+    
+    node->deltaDepth = 0;
+    rightSubTree->deltaDepth = 0;
 
     node->right = std::move(rightSubTree->left);
     node->parrent = rightSubTree.get();
 
     if (!rightSubTree->right)
         rightSubTree->right->parrent = rightSubTree.get();
-        
+
     if (node->parrent != nullptr){
         // need to idetify if node is left or right child of the parrent
         if (parrent->left.get() == node){ // node is left child
@@ -160,7 +163,6 @@ void AVLTree::rotateLeft(Node * node){
     
     if (!node->right)
         node->right->parrent = node;
-
 }
 
 // void AVLTree::rotateRight(Node * node){
