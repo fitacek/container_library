@@ -6,7 +6,8 @@ BUILD_DIR   = build
 
 # Compiler flags
 CXX = g++
-CXXFLAGS = -std=c++17 -I$(INCLUDE_DIR) -Wall -pedantic -Wextra -g
+CXXFLAGS = -std=c++17 -I$(INCLUDE_DIR) -Wall -pedantic -Wextra -g -fsanitize=address
+LDFLAGS = -fsanitize=address
 
 # Targets
 LIB_OBJ = $(BUILD_DIR)/avl_tree.o
@@ -25,7 +26,7 @@ test: $(EXEC)
 
 # Build the test executable
 $(EXEC): $(LIB_OBJ) $(TEST_OBJ)
-	$(CXX) $^ -o $@
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@
 
 # Compile source files
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
