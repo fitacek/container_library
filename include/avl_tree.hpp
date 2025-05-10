@@ -26,8 +26,10 @@ private:
         int value;
         std::unique_ptr<Node> left;
         std::unique_ptr<Node> right;
-        std::unique_ptr<Node> parrent;
-        Node(int key, int value) : key(key), value(value) {}
+        Node * parrent = nullptr; // using raw pointer here because unique_ptr cannot be copied. shared_ptr has RC overhead and observer_ptr is c++23 feature
+        
+        Node(int key, int value, Node * parrent = nullptr);
+        bool isLeaf() const;
     };
     std::unique_ptr<Node> root;
     size_t nodeCount = 0;
