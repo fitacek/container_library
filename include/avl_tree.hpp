@@ -14,7 +14,6 @@ public:
     bool insert(const int key, const int value);
     bool remove(const int key);
 
-    void contains(const int key) const;
     std::optional<int> find(const int key) const;
 
     bool empty() const;
