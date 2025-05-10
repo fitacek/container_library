@@ -29,6 +29,8 @@ private:
         std::unique_ptr<Node> left;
         std::unique_ptr<Node> right;
         Node *parrent = nullptr; // using raw pointer here because unique_ptr cannot be copied. shared_ptr has RC overhead and observer_ptr is c++23 feature
+        size_t depthLeft = 0; // depth of left subtree
+        size_t depthRight = 0; // depth of right subtree
 
         Node(int key, int value, Node *parrent = nullptr);
         bool isLeaf() const;
