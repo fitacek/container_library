@@ -45,6 +45,7 @@ private:
 
     void printInOrderInternal(Node * node) const;
 
+    void propagateUpDepthChange(Node * newNode);
     void rotateLeft(Node * node);
     // void rotateRight(Node * node);
     // void rotateLeftRight(Node * node);
