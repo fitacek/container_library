@@ -47,8 +47,8 @@ private:
 
     void propagateUpDepthChange(Node * newNode);
     void rotateLeft(Node * node);
-    // void rotateRight(Node * node);
-    // void rotateLeftRight(Node * node);
-    // void rotateRightLeft(Node * node);
+    void rotateRight(Node * node);
+    void rotateLeftRight(Node * node);
+    void rotateRightLeft(Node * node);
 
 };
