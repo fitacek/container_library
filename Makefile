@@ -10,29 +10,21 @@ CXXFLAGS = -std=c++17 -I$(INCLUDE_DIR) -Wall -pedantic -Wextra -g -fsanitize=add
 LDFLAGS = -fsanitize=address
 
 # Targets
-LIB_OBJ = $(BUILD_DIR)/avl_tree.o
 TEST_OBJ = $(BUILD_DIR)/test_avl_tree.o
 EXEC = $(BUILD_DIR)/test_avl
 
 # Default target
-all: compile
-
-# Compile the library (only the .o file)
-compile: $(LIB_OBJ)
+all: test
 
 # Compile and link the test
 test: $(EXEC)
 	./$(EXEC)
 
-# Build the test executable
-$(EXEC): $(LIB_OBJ) $(TEST_OBJ)
+# Build the test executable (no library object linked)
+$(EXEC): $(TEST_OBJ)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $^ -o $@
 
-# Compile source files
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
-	mkdir -p $(BUILD_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
+# Compile test source file
 $(BUILD_DIR)/test_avl_tree.o: $(TEST_DIR)/test_avl_tree.cpp
 	mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
