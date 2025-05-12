@@ -10,7 +10,7 @@ class AVLTree
 
 public:
     AVLTree();
-    // ~AVLTree(){}
+    ~AVLTree();
     bool insert(const int key, const int value);
     bool remove(const int key);
 
@@ -47,6 +47,8 @@ private:
     size_t nodeCount = 0;
 
     void printInOrderInternal(Node * node) const;
+
+    void destroyTree(Node * root);
 
     void propagateUpDepthChange(Node * newNode);
     void rotateLeft(Node * node);

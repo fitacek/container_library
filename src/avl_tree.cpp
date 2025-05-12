@@ -1,6 +1,11 @@
 #include "../include/avl_tree.hpp"
 #include <iostream>
+
 AVLTree::AVLTree() {}
+
+AVLTree::~AVLTree(){
+    clear();
+}
 
 size_t AVLTree::size() const
 {
@@ -127,10 +132,20 @@ std::optional<int> AVLTree::find(const int key) const
 
 void AVLTree::clear()
 {
-    // TODO: deallocate all nodes of tree
-    //root.reset();
+    destroyTree(root);
+    root = nullptr;
     nodeCount = 0;
 }
+
+void AVLTree::destroyTree(Node * root){
+    // TODO: recursion could be bad for performance & memory reasons
+    if (root == nullptr)
+        return;
+    destroyTree(root->left);
+    destroyTree(root->right);
+    delete root;
+}
+
 
 void AVLTree::rotateLeft(Node *node)
 {
