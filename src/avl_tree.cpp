@@ -33,35 +33,21 @@ bool AVLTree::insert(const int key, const int value)
     {
         tail = head;
         if (key < head->key)
-        {   
-            // go left
-            head = head->left; 
-        }
+            head = head->left; // go left
         else if (key > head->key)
-        {
-            // go right
-            head = head->right;
-        }
+            head = head->right; // go right
         else
-        {
-            // trying to insert duplicate key
-            return false;
-        }
+            return false; // key already exists
     }
     // head == nullptr
     // tail == parrent of head (never nullptr)
 
     Node * newNode = new Node(key, value, tail);
     if (key < tail->key)
-    {
-        // insert new node to left
-        tail->left = newNode;
-    }
+        tail->left = newNode; // insert new node to left
     else
-    {
-        // insert new node to right
-        tail->right = newNode;
-    }
+        tail->right = newNode; // insert new node to right
+
     nodeCount++;
     // node is inserted, now there may be need to rebalance the tree
     // propagateUpDepthChange(newNode);
@@ -108,26 +94,18 @@ std::optional<int> AVLTree::find(const int key) const
     while (head != nullptr)
     {
         tail = head;
+
         if (key < head->key)
-        {
-            // go left
-            head = head->left;
-        }
-        else if (key > head->key)
-        {
-            // go right
-            head = head->right;
-        }
+            head = head->left; // go left
+        else if (key > head->key)            
+            head = head->right; // go right
         else
-        {
-            // key found, return the value
-            return tail->value;
-        }
+            return tail->value; // key found, return the value
     }
     // head == nullptr
     // tail == parrent of head
-    // key not found, return empty optional
-    return std::nullopt;
+    
+    return std::nullopt; // key not found, return empty optional
 }
 
 void AVLTree::clear()
