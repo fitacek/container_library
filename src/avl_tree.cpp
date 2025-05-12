@@ -16,12 +16,13 @@ bool AVLTree::insert(const int key, const int value)
 {
     if (nodeCount == 0)
     {
-        root = std::make_unique<Node>(key, value);
+
+        root = new Node(key, value);
         nodeCount++;
         return true;
     }
 
-    Node *head = root.get();
+    Node *head = root;
     Node *tail = nullptr;
 
     while (head != nullptr)
@@ -30,12 +31,12 @@ bool AVLTree::insert(const int key, const int value)
         if (key < head->key)
         {
             // go left
-            head = head->left.get();
+            head = head->left;
         }
         else if (key > head->key)
         {
             // go right
-            head = head->right.get();
+            head = head->right;
         }
         else
         {
@@ -50,25 +51,25 @@ bool AVLTree::insert(const int key, const int value)
     if (key < tail->key)
     {
         // insert new node to left
-        tail->left = std::make_unique<Node>(key, value, tail);
-        newNode = tail->left.get();
+        tail->left = new Node(key, value, tail);
+        newNode = tail->left;
     }
     else
     {
         // insert new node to right
-        tail->right = std::make_unique<Node>(key, value, tail);
-        newNode = tail->right.get();
+        tail->right = new Node(key, value, tail);
+        newNode = tail->right;
     }
     nodeCount++;
     // node is inserted, now there may be need to rebalance the tree
-    propagateUpDepthChange(newNode);
+    // propagateUpDepthChange(newNode);
     return true;
 }
 
 void AVLTree::printInOrder() const
 {
     std::cout << "Print inOrder:\n";
-    printInOrderInternal(root.get());
+    printInOrderInternal(root);
     std::cout << "\n";
 }
 
@@ -76,10 +77,10 @@ void AVLTree::printInOrderInternal(Node *node) const
 {
     if (!node)
         return;
-    printInOrderInternal(node->left.get());
+    printInOrderInternal(node->left);
     // std::cout<<node->key<<" ";
     node->print();
-    printInOrderInternal(node->right.get());
+    printInOrderInternal(node->right);
 };
 
 AVLTree::Node::Node(int key, int value, Node *parrent) : key(key), value(value), parrent(parrent) {}
@@ -99,7 +100,7 @@ void AVLTree::Node::print() const
 
 std::optional<int> AVLTree::find(const int key) const
 {
-    Node *head = root.get();
+    Node *head = root;
     Node *tail = nullptr;
 
     while (head != nullptr)
@@ -108,12 +109,12 @@ std::optional<int> AVLTree::find(const int key) const
         if (key < head->key)
         {
             // go left
-            head = head->left.get();
+            head = head->left;
         }
         else if (key > head->key)
         {
             // go right
-            head = head->right.get();
+            head = head->right;
         }
         else
         {
@@ -129,54 +130,56 @@ std::optional<int> AVLTree::find(const int key) const
 
 void AVLTree::clear()
 {
-    root.reset();
+    // TODO: deallocate all nodes of tree
+    //root.reset();
     nodeCount = 0;
 }
 
 void AVLTree::rotateLeft(Node *node)
 {
-    // node is Node with weigth: -2
-    Node *parrent = node->parrent; // parrent of node
+    // TODO: rewrite this function completely
+    // // node is Node with weigth: -2
+    // Node *parrent = node->parrent; // parrent of node
 
-    auto rightSubTree = std::move(node->right); // should never be nullptr
-    rightSubTree->parrent = node->parrent;
+    // auto rightSubTree = std::move(node->right); // should never be nullptr
+    // rightSubTree->parrent = node->parrent;
 
-    node->deltaDepth = 0;
-    rightSubTree->deltaDepth = 0;
+    // node->deltaDepth = 0;
+    // rightSubTree->deltaDepth = 0;
 
-    node->right = std::move(rightSubTree->left);
-    node->parrent = rightSubTree.get();
+    // node->right = std::move(rightSubTree->left);
+    // node->parrent = rightSubTree.get();
 
-    if (rightSubTree->right != nullptr)
-        rightSubTree->right->parrent = rightSubTree.get();
+    // if (rightSubTree->right != nullptr)
+    //     rightSubTree->right->parrent = rightSubTree.get();
 
-    if (node->parrent != nullptr)
-    {
-        // need to idetify if node is left or right child of the parrent
-        if (parrent->left.get() == node)
-        { // node is left child
-            rightSubTree->left = std::move(parrent->left);
-            parrent->left = std::move(rightSubTree);
-        }
-        else
-        { // node is right child
-            rightSubTree->left = std::move(parrent->right);
-            parrent->right = std::move(rightSubTree);
-        }
-    }
-    else
-    {
-        // node was root, therefore had no parrent
-        rightSubTree->left = std::move(root);
-        root = std::move(rightSubTree); // root has changed. Y is the new root
-    }
+    // if (node->parrent != nullptr)
+    // {
+    //     // need to idetify if node is left or right child of the parrent
+    //     if (parrent->left.get() == node)
+    //     { // node is left child
+    //         rightSubTree->left = std::move(parrent->left);
+    //         parrent->left = std::move(rightSubTree);
+    //     }
+    //     else
+    //     { // node is right child
+    //         rightSubTree->left = std::move(parrent->right);
+    //         parrent->right = std::move(rightSubTree);
+    //     }
+    // }
+    // else
+    // {
+    //     // node was root, therefore had no parrent
+    //     rightSubTree->left = std::move(root);
+    //     root = std::move(rightSubTree); // root has changed. Y is the new root
+    // }
 
-    // set parrents
-    if (node->left != nullptr)
-        node->left->parrent = node;
+    // // set parrents
+    // if (node->left != nullptr)
+    //     node->left->parrent = node;
 
-    if (node->right != nullptr)
-        node->right->parrent = node;
+    // if (node->right != nullptr)
+    //     node->right->parrent = node;
 }
 
 void AVLTree::rotateRight(Node * node){
@@ -193,6 +196,7 @@ void AVLTree::rotateRightLeft(Node * node){
 
 void AVLTree::propagateUpDepthChange(Node *newNode)
 {
+    // TODO: rewrite this completelly
     if (newNode->parrent != nullptr)
     {
         if (newNode->parrent->left != nullptr && newNode->parrent->right != nullptr)
@@ -210,7 +214,7 @@ void AVLTree::propagateUpDepthChange(Node *newNode)
     {
 
         if (head->parrent != nullptr){ // head is not root
-            const bool isLeftChild = head->parrent->left.get() == head;
+            const bool isLeftChild = head->parrent->left == head;
             
             if (isLeftChild)
                 head->parrent->deltaDepth --;

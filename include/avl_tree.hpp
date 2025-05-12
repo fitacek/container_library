@@ -27,8 +27,10 @@ private:
     {
         int key;
         int value;
-        std::unique_ptr<Node> left;
-        std::unique_ptr<Node> right;
+        Node * left = nullptr;
+        Node * right = nullptr;
+        // std::unique_ptr<Node> left;
+        // std::unique_ptr<Node> right;
         Node *parrent = nullptr; // using raw pointer here because unique_ptr cannot be copied. shared_ptr has RC overhead and observer_ptr is c++23 feature
         
         //size_t depthLeft = 0; // depth of left subtree
@@ -40,7 +42,8 @@ private:
 
         void print() const;
     };
-    std::unique_ptr<Node> root;
+    Node * root = nullptr;
+    // std::unique_ptr<Node> root;
     size_t nodeCount = 0;
 
     void printInOrderInternal(Node * node) const;
