@@ -38,7 +38,7 @@ private:
         int deltaDepth = 0;
 
         Node(int key, int value, Node *parrent = nullptr);
-        bool isLeaf() const;
+        // bool isLeaf() const;
 
         void print() const;
     };
