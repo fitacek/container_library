@@ -16,7 +16,6 @@ bool AVLTree::insert(const int key, const int value)
 {
     if (nodeCount == 0)
     {
-
         root = new Node(key, value);
         nodeCount++;
         return true;
@@ -29,9 +28,9 @@ bool AVLTree::insert(const int key, const int value)
     {
         tail = head;
         if (key < head->key)
-        {
+        {   
             // go left
-            head = head->left;
+            head = head->left; 
         }
         else if (key > head->key)
         {
@@ -47,18 +46,16 @@ bool AVLTree::insert(const int key, const int value)
     // head == nullptr
     // tail == parrent of head (never nullptr)
 
-    Node * newNode = nullptr;
+    Node * newNode = new Node(key, value, tail);
     if (key < tail->key)
     {
         // insert new node to left
-        tail->left = new Node(key, value, tail);
-        newNode = tail->left;
+        tail->left = newNode;
     }
     else
     {
         // insert new node to right
-        tail->right = new Node(key, value, tail);
-        newNode = tail->right;
+        tail->right = newNode;
     }
     nodeCount++;
     // node is inserted, now there may be need to rebalance the tree
