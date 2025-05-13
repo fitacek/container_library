@@ -52,7 +52,7 @@ public:
 
     void propagateUpDepthChange(Node * newNode);
     void rotateLeft(Node * node);
-    void rotateRight(Node * node);
+    void rotateRight(Node * x);
     void rotateLeftRight(Node * node);
     void rotateRightLeft(Node * node);
 
