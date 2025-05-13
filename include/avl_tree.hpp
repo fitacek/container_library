@@ -22,13 +22,13 @@ public:
 
     void printInOrder() const;
 
-// private:
+    // private:
     struct Node
     {
         int key;
         int value;
-        Node * left = nullptr;
-        Node * right = nullptr;
+        Node *left = nullptr;
+        Node *right = nullptr;
         Node *parrent = nullptr;
         int deltaDepth = 0;
 
@@ -36,17 +36,16 @@ public:
 
         void print() const;
     };
-    Node * root = nullptr;
+    Node *root = nullptr;
     size_t nodeCount = 0;
 
-    void printInOrderInternal(Node * node) const;
+    void printInOrderInternal(Node *node) const;
 
-    void destroyTree(Node * root);
+    void destroyTree(Node *root);
 
-    void propagateUpDepthChange(Node * newNode);
-    void rotateLeft(Node * x);
-    void rotateRight(Node * x);
-    void rotateLeftRight(Node * x);
-    void rotateRightLeft(Node * x);
-
+    void propagateUpDepthChange(Node *newNode);
+    void rotateLeft(Node *x);
+    void rotateRight(Node *x);
+    void rotateLeftRight(Node *x);
+    void rotateRightLeft(Node *x);
 };
