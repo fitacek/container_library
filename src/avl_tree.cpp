@@ -19,6 +19,7 @@ bool AVLTree::empty() const
 
 bool AVLTree::insert(const int key, const int value)
 {
+    std::cout<<">>insert("<<key<<")\n";
     if (nodeCount == 0)
     {
         root = new Node(key, value);
