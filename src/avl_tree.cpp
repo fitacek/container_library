@@ -84,7 +84,9 @@ void AVLTree::Node::print() const
     std::cout << "key= " << key << ", "
               << "parent= " << (parrent != nullptr ? std::to_string(parrent->key) : "n") << ", "
               << "leftChild= " << (left != nullptr ? std::to_string(left->key) : "n") << ", "
-              << "rightChild= " << (right != nullptr ? std::to_string(right->key) : "n") << std::endl;
+              << "rightChild= " << (right != nullptr ? std::to_string(right->key) : "n") <<", "
+              << "deltaDepth= " << deltaDepth
+              << std::endl;
 }
 
 std::optional<int> AVLTree::find(const int key) const
