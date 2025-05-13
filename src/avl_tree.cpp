@@ -50,7 +50,7 @@ bool AVLTree::insert(const int key, const int value)
 
     nodeCount++;
     // node is inserted, now there may be need to rebalance the tree
-    // propagateUpDepthChange(newNode);
+    propagateUpDepthChange(newNode);
     return true;
 }
 
@@ -130,6 +130,7 @@ void AVLTree::destroyTree(Node * root){
 
 void AVLTree::rotateLeft(Node * x)
 {
+    std::cout<<"rotateLeft()\n";
     Node * y = x->right;
     Node * b = y->left;
     Node * p = x->parrent;
@@ -159,6 +160,7 @@ void AVLTree::rotateLeft(Node * x)
 }
 
 void AVLTree::rotateRight(Node * x){
+    std::cout<<"rotateRight()\n";
     Node * y = x->left;
     Node * b = y->right;
     Node * p = x->parrent;
@@ -199,50 +201,55 @@ void AVLTree::rotateRightLeft(Node * x){
 
 void AVLTree::propagateUpDepthChange(Node *newNode)
 {
-    if (newNode->parrent != nullptr)
-    {   // node has parrent
-        if (newNode->parrent->left != nullptr && newNode->parrent->right != nullptr)
-        {
-            // parrent already had a child, deltaDepth will be 0
-            newNode->parrent->deltaDepth = 0;
-            return;
-        }
+    if (newNode == root)
+        return;
+
+    // newNode is not root. Therefore it has parrent
+    
+    if (newNode->parrent->left != nullptr && newNode->parrent->right != nullptr) // deltaDepth of parrent has not changed
+        return;
+    else{
+        // deltaDepth of parrent has changed
+        if (newNode->parrent->left == newNode) 
+            newNode->parrent->deltaDepth--; // newNode is leftChild
+        else
+            newNode->parrent->deltaDepth++; // newNode is rightChild
     }
-    Node * head = newNode;
-    Node * tail = head;
 
+    Node * head = newNode->parrent;
     while (head != nullptr){
-        tail = head;
-
-        if (head->parrent != nullptr){ // head has parrent
-            const bool isLeftChild = head->parrent->left == head;
-            
-            if (isLeftChild)
-                head->parrent->deltaDepth --;
-            else
-                head->parrent->deltaDepth ++;
-        }
-
-        switch (head->parrent->deltaDepth)
-        {
-            case 0:
-                return; // end propagation
-            case 1:
-            case -2:
-                if (head->left->deltaDepth == -1)
-                    rotateRight(head->parrent);
-                 else if (head->left->deltaDepth == 1) // this is unnecesarry
-                    rotateLeftRight(head);
-                return;
-            case 2:
+        // traverse from newNode->parrent to root
+        switch (head->deltaDepth){
+            case 0: return; // end propagation
+            case 1: break;
+            case -1: break;
+            case 2: // rotate and end propagation
                 if (head->right->deltaDepth == 1)
                     rotateLeft(head);
-                else if (head->right->deltaDepth == -1)
+                else if (head->right->deltaDepth == -1){
                     rotateRightLeft(head);
+                }
                 return;
-            default:
-                break;
+
+            case -2: // rotate and end propagation
+                if (head->left->deltaDepth == -1)
+                    rotateRight(head);
+                else if (head->left->deltaDepth == 1){
+                    rotateLeftRight(head);
+                }
+                return;
         }
+
+        // deltaDepth for head was 1 or -1
+        if (head->parrent != nullptr){
+            if (head->parrent->left == head)
+                head->parrent->deltaDepth--;
+            else 
+                head->parrent->deltaDepth++;
+        }
+
         head = head->parrent;
     }
+
+
 }
