@@ -52,7 +52,7 @@ bool AVLTree::insert(const int key, const int value)
 
     nodeCount++;
     // node is inserted, now there may be need to rebalance the tree
-    propagateUpDepthChange(newNode);
+    propagateUpDepthChangeOnInsert(newNode);
     return true;
 }
 
@@ -191,7 +191,7 @@ void AVLTree::rotateRightLeft(Node *x)
     rotateLeft(x);
 }
 
-void AVLTree::propagateUpDepthChange(Node *newNode)
+void AVLTree::propagateUpDepthChangeOnInsert(Node *newNode)
 {
     if (newNode == root)
         return;
