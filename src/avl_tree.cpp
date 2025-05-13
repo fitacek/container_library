@@ -57,6 +57,7 @@ bool AVLTree::insert(const int key, const int value)
 void AVLTree::printInOrder() const
 {
     std::cout << "Print inOrder:\n";
+    std::cout << "Root =" << root->key << "\n";
     printInOrderInternal(root);
     std::cout << "\n";
 }
@@ -173,7 +174,38 @@ void AVLTree::rotateLeft(Node *node)
 }
 
 void AVLTree::rotateRight(Node * node){
+    Node * x = node;
+    Node * y = x->left;
+    Node * a = y->left;
+    Node * b = y->right;
+    Node * c = x->right;
+    Node * p = x->parrent;
 
+    y->left = a;
+    y->right = x;
+    x->left = b;
+    x->right = c;
+
+    y->deltaDepth = 0;
+    x->deltaDepth = 0;
+
+    if (x == root){
+        root = y;
+        root->parrent = nullptr;
+    } else {
+        // x has parrent
+        if (p->left == x)
+            p->left = y;
+        else if (p->right == x)
+            p->right = y;
+        else
+            exit(10); // should be unreachable state
+    }
+
+    // set parrents
+    y->parrent = p;
+    if (b)
+        b->parrent = x;
 }
 
 void AVLTree::rotateLeftRight(Node * node){
@@ -186,24 +218,22 @@ void AVLTree::rotateRightLeft(Node * node){
 
 void AVLTree::propagateUpDepthChange(Node *newNode)
 {
-    // TODO: rewrite this completelly
     if (newNode->parrent != nullptr)
-    {
+    {   // node has parrent
         if (newNode->parrent->left != nullptr && newNode->parrent->right != nullptr)
         {
-            // node already had a child, deltaDepth will be 0
+            // parrent already had a child, deltaDepth will be 0
             newNode->parrent->deltaDepth = 0;
             return;
         }
-    } else {
-        return; // newNode is root
     }
+    Node * head = newNode;
+    Node * tail = head;
 
-    Node *head = newNode;
-    while (head != nullptr)
-    {
+    while (head != nullptr){
+        tail = head;
 
-        if (head->parrent != nullptr){ // head is not root
+        if (head->parrent != nullptr){ // head has parrent
             const bool isLeftChild = head->parrent->left == head;
             
             if (isLeftChild)
@@ -212,17 +242,14 @@ void AVLTree::propagateUpDepthChange(Node *newNode)
                 head->parrent->deltaDepth ++;
         }
 
-        switch (head->deltaDepth)
+        switch (head->parrent->deltaDepth)
         {
             case 0:
                 return; // end propagation
-            // case -1:
-            //     break;
-            // case 1:
-            //     break;
+            case 1:
             case -2:
                 if (head->left->deltaDepth == -1)
-                    rotateRight(head);
+                    rotateRight(head->parrent);
                  else if (head->left->deltaDepth == 1) // this is unnecesarry
                     rotateLeftRight(head);
                 return;

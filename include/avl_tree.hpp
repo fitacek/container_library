@@ -22,7 +22,7 @@ public:
 
     void printInOrder() const;
 
-private:
+// private:
     struct Node
     {
         int key;
