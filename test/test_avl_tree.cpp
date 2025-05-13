@@ -10,18 +10,29 @@ int main(){
     // t.insert(4,0);
     // t.insert(2,0);
     // t.insert(3,0);
-    // t.insert(7,0);
-    // t.insert(6,0);
-    // t.insert(8,0);
 
     t.insert(8,0);
+    t.printInOrder();
+
     t.insert(7,0);
+    t.printInOrder();
+    
     t.insert(6,0);
-    t.rotateRight(t.root);
+    t.printInOrder();
 
     t.insert(5,0);
-    t.rotateRight(t.root);
-
     t.printInOrder();
+
+    t.insert(4,0);
+    t.printInOrder();
+    // t.insert(1,0);
+    // t.insert(2,0);
+    // t.insert(3,0);
+
+    // t.rotateLeft(t.root);
+
+    // t.insert(5,0);
+    // t.rotateRight(t.root);
+
     return 0;
 }
