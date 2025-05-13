@@ -204,6 +204,7 @@ void AVLTree::rotateRight(Node * node){
 
     // set parrents
     y->parrent = p;
+    x->parrent = y;
     if (b)
         b->parrent = x;
 }
