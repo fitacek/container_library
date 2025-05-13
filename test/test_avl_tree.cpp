@@ -14,9 +14,13 @@ int main(){
     // t.insert(6,0);
     // t.insert(8,0);
 
-    t.insert(5,0);
-    t.insert(7,0);
     t.insert(8,0);
+    t.insert(7,0);
+    t.insert(6,0);
+    t.rotateRight(t.root);
+
+    t.insert(5,0);
+    t.rotateRight(t.root);
 
     t.printInOrder();
     return 0;
