@@ -173,8 +173,7 @@ void AVLTree::rotateLeft(Node *node)
     //     node->right->parrent = node;
 }
 
-void AVLTree::rotateRight(Node * node){
-    Node * x = node;
+void AVLTree::rotateRight(Node * x){
     Node * y = x->left;
     Node * a = y->left;
     Node * b = y->right;
