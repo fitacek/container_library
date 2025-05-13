@@ -126,7 +126,7 @@ void AVLTree::destroyTree(Node * root){
 }
 
 
-void AVLTree::rotateLeft(Node *node)
+void AVLTree::rotateLeft(Node * x)
 {
     // TODO: rewrite this function completely
     // // node is Node with weigth: -2
@@ -208,11 +208,11 @@ void AVLTree::rotateRight(Node * x){
         b->parrent = x;
 }
 
-void AVLTree::rotateLeftRight(Node * node){
+void AVLTree::rotateLeftRight(Node * x){
 
 }
 
-void AVLTree::rotateRightLeft(Node * node){
+void AVLTree::rotateRightLeft(Node * x){
 
 }
 

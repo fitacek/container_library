@@ -51,9 +51,9 @@ public:
     void destroyTree(Node * root);
 
     void propagateUpDepthChange(Node * newNode);
-    void rotateLeft(Node * node);
+    void rotateLeft(Node * x);
     void rotateRight(Node * x);
-    void rotateLeftRight(Node * node);
-    void rotateRightLeft(Node * node);
+    void rotateLeftRight(Node * x);
+    void rotateRightLeft(Node * x);
 
 };
