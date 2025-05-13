@@ -134,28 +134,7 @@ void AVLTree::rotateLeft(Node *x)
     y->left = x;
     x->right = b;
 
-    y->deltaDepth = 0;
-    x->deltaDepth = 0;
-
-    if (x == root)
-    {
-        root = y;
-        root->parrent = nullptr;
-    }
-    else
-    {
-        // x has parrent
-        if (p->left == x)
-            p->left = y;
-        else
-            p->right = y;
-    }
-
-    // set parrents
-    y->parrent = p;
-    x->parrent = y;
-    if (b)
-        b->parrent = x;
+    finishSingleRotation(x, y, b);
 }
 
 void AVLTree::rotateRight(Node *x)
@@ -168,30 +147,7 @@ void AVLTree::rotateRight(Node *x)
     y->right = x;
     x->left = b;
 
-    y->deltaDepth = 0;
-    x->deltaDepth = 0;
-
-    if (x == root)
-    {
-        root = y;
-        root->parrent = nullptr;
-    }
-    else
-    {
-        // x has parrent
-        if (p->left == x)
-            p->left = y;
-        else if (p->right == x)
-            p->right = y;
-        else
-            exit(10); // should be unreachable state
-    }
-
-    // set parrents
-    y->parrent = p;
-    x->parrent = y;
-    if (b)
-        b->parrent = x;
+    finishSingleRotation(x, y, b);
 }
 
 void AVLTree::finishSingleRotation(Node * x, Node * y, Node * b){
