@@ -128,49 +128,6 @@ void AVLTree::destroyTree(Node * root){
 
 void AVLTree::rotateLeft(Node * x)
 {
-    // TODO: rewrite this function completely
-    // // node is Node with weigth: -2
-    // Node *parrent = node->parrent; // parrent of node
-
-    // auto rightSubTree = std::move(node->right); // should never be nullptr
-    // rightSubTree->parrent = node->parrent;
-
-    // node->deltaDepth = 0;
-    // rightSubTree->deltaDepth = 0;
-
-    // node->right = std::move(rightSubTree->left);
-    // node->parrent = rightSubTree.get();
-
-    // if (rightSubTree->right != nullptr)
-    //     rightSubTree->right->parrent = rightSubTree.get();
-
-    // if (node->parrent != nullptr)
-    // {
-    //     // need to idetify if node is left or right child of the parrent
-    //     if (parrent->left.get() == node)
-    //     { // node is left child
-    //         rightSubTree->left = std::move(parrent->left);
-    //         parrent->left = std::move(rightSubTree);
-    //     }
-    //     else
-    //     { // node is right child
-    //         rightSubTree->left = std::move(parrent->right);
-    //         parrent->right = std::move(rightSubTree);
-    //     }
-    // }
-    // else
-    // {
-    //     // node was root, therefore had no parrent
-    //     rightSubTree->left = std::move(root);
-    //     root = std::move(rightSubTree); // root has changed. Y is the new root
-    // }
-
-    // // set parrents
-    // if (node->left != nullptr)
-    //     node->left->parrent = node;
-
-    // if (node->right != nullptr)
-    //     node->right->parrent = node;
 }
 
 void AVLTree::rotateRight(Node * x){
