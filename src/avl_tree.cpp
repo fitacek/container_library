@@ -68,17 +68,12 @@ void AVLTree::printInOrderInternal(Node *node) const
     if (!node)
         return;
     printInOrderInternal(node->left);
-    // std::cout<<node->key<<" ";
     node->print();
     printInOrderInternal(node->right);
 };
 
 AVLTree::Node::Node(int key, int value, Node *parrent) : key(key), value(value), parrent(parrent) {}
 
-// bool AVLTree::Node::isLeaf() const
-// {
-//     return left == nullptr && right == nullptr;
-// }
 
 void AVLTree::Node::print() const
 {
