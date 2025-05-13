@@ -128,6 +128,8 @@ void AVLTree::destroyTree(Node * root){
 
 void AVLTree::rotateLeft(Node * x)
 {
+    Node * y = x->right;
+    Node * b = y->left;
 }
 
 void AVLTree::rotateRight(Node * x){
