@@ -48,4 +48,5 @@ public:
     void rotateRight(Node *x);
     void rotateLeftRight(Node *x);
     void rotateRightLeft(Node *x);
+    void finishSingleRotation(Node * x, Node * y, Node * b);
 };

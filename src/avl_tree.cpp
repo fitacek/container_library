@@ -194,6 +194,32 @@ void AVLTree::rotateRight(Node *x)
         b->parrent = x;
 }
 
+void AVLTree::finishSingleRotation(Node * x, Node * y, Node * b){
+    Node * p = x->parrent;
+    y->deltaDepth = 0;
+    x->deltaDepth = 0;
+
+    if (x == root)
+    {
+        root = y;
+        root->parrent = nullptr;
+    }
+    else
+    {
+        // x has parrent
+        if (p->left == x)
+            p->left = y;
+        else
+            p->right = y;
+    }
+
+    // set parrents
+    y->parrent = p;
+    x->parrent = y;
+    if (b)
+        b->parrent = x;
+}
+
 void AVLTree::rotateLeftRight(Node *x)
 {
     Node *y = x->left;
