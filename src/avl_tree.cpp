@@ -150,8 +150,9 @@ void AVLTree::rotateRight(Node *x)
     finishSingleRotation(x, y, b);
 }
 
-void AVLTree::finishSingleRotation(Node * x, Node * y, Node * b){
-    Node * p = x->parrent;
+void AVLTree::finishSingleRotation(Node *x, Node *y, Node *b)
+{
+    Node *p = x->parrent;
     y->deltaDepth = 0;
     x->deltaDepth = 0;
 
@@ -217,10 +218,10 @@ void AVLTree::propagateUpDepthChange(Node *newNode)
         case 0:
             return; // end propagation
         case 1:
-            break;
+            break; // continue propagation to parrent
         case -1:
-            break;
-        case 2: // rotate and end propagation
+            break; // continue propagation to parrent
+        case 2:    // rotate and end propagation
             if (head->right->deltaDepth == 1)
                 rotateLeft(head);
             else if (head->right->deltaDepth == -1)
