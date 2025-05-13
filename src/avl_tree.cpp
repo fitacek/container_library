@@ -135,12 +135,10 @@ void AVLTree::rotateLeft(Node * x)
 void AVLTree::rotateRight(Node * x){
     Node * y = x->left;
     Node * b = y->right;
-    Node * c = x->right;
     Node * p = x->parrent;
 
     y->right = x;
     x->left = b;
-    x->right = c;
 
     y->deltaDepth = 0;
     x->deltaDepth = 0;
