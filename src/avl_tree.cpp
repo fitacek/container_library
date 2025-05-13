@@ -193,11 +193,15 @@ void AVLTree::rotateRight(Node * x){
 }
 
 void AVLTree::rotateLeftRight(Node * x){
-
+    Node * y = x->left;
+    rotateLeft(y);
+    rotateRight(x);
 }
 
 void AVLTree::rotateRightLeft(Node * x){
-
+    Node * y = x->right;
+    rotateRight(y);
+    rotateLeft(x);
 }
 
 void AVLTree::propagateUpDepthChange(Node *newNode)
