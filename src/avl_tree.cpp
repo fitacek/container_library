@@ -127,25 +127,25 @@ void AVLTree::destroyTree(Node *root)
 void AVLTree::rotateLeft(Node *x)
 {
     /*
-    *   Rotation schema (rotate left):
-    * 
-    *     BEFORE           AFTER
-    * 
-    *      (x)             (y)
-    *      / \             / \
-    *    (a) (y)   =>    (x) (c)
-    *        / \         / \ 
-    *      (b) (c)     (a) (b)
-    * 
-    *  where:
-    *   a, b, c are roots of subtrees
-    *   deltaDepthBefore(x) = +2
-    *   deltaDepthBefore(y) = +1
-    * 
-    *   deltaDepthAfter(x) = 0
-    *   deltaDepthAfter(y) = 0
-    * 
-    * */
+     *   Rotation schema (rotate left):
+     *
+     *     BEFORE           AFTER
+     *
+     *      (x)             (y)
+     *      / \             / \
+     *    (a) (y)   =>    (x) (c)
+     *        / \         / \
+     *      (b) (c)     (a) (b)
+     *
+     *  where:
+     *   a, b, c are roots of subtrees
+     *   deltaDepthBefore(x) = +2
+     *   deltaDepthBefore(y) = +1
+     *
+     *   deltaDepthAfter(x) = 0
+     *   deltaDepthAfter(y) = 0
+     *
+     * */
     std::cout << "rotateLeft()\n";
     Node *y = x->right;
     Node *b = y->left;
@@ -160,25 +160,25 @@ void AVLTree::rotateLeft(Node *x)
 void AVLTree::rotateRight(Node *x)
 {
     /*
-    *   Rotation schema (rotate right):
-    * 
-    *     BEFORE           AFTER
-    * 
-    *      (x)             (y)
-    *      / \             / \
-    *    (y) (c)   =>    (a) (x)
-    *    / \                 / \ 
-    *  (a) (b)             (b) (c)
-    * 
-    *  where:
-    *   a, b, c are roots of subtrees
-    *   deltaDepthBefore(x) = -2
-    *   deltaDepthBefore(y) = -1
-    * 
-    *   deltaDepthAfter(x) = 0
-    *   deltaDepthAfter(y) = 0
-    * 
-    * */
+     *   Rotation schema (rotate right):
+     *
+     *     BEFORE           AFTER
+     *
+     *      (x)             (y)
+     *      / \             / \
+     *    (y) (c)   =>    (a) (x)
+     *    / \                 / \
+     *  (a) (b)             (b) (c)
+     *
+     *  where:
+     *   a, b, c are roots of subtrees
+     *   deltaDepthBefore(x) = -2
+     *   deltaDepthBefore(y) = -1
+     *
+     *   deltaDepthAfter(x) = 0
+     *   deltaDepthAfter(y) = 0
+     *
+     * */
 
     std::cout << "rotateRight()\n";
     Node *y = x->left;
@@ -221,27 +221,27 @@ void AVLTree::finishSingleRotation(Node *x, Node *y, Node *b)
 void AVLTree::rotateLeftRight(Node *x)
 {
     /*
-    *   Rotation schema (rotate leftRight):
-    * 
-    *     BEFORE           AFTER
-    * 
-    *      (x)              ( z )
-    *      / \             /    \
-    *    (y) (d)   =>    (y)    (x)
-    *    / \             / \    / \ 
-    *  (a) (z)         (a) (b) (c) (d)
-    *      / \
-    *    (b) (c)
-    *
-    *  where:
-    *   a, b, c, d are roots of subtrees
-    *   deltaDepthBefore(x) = -2
-    *   deltaDepthBefore(y) = +1
-    * 
-    *   deltaDepthAfter(x) = 0
-    *   deltaDepthAfter(y) = 0
-    * 
-    * */
+     *   Rotation schema (rotate leftRight):
+     *
+     *     BEFORE           AFTER
+     *
+     *      (x)              ( z )
+     *      / \             /    \
+     *    (y) (d)   =>    (y)    (x)
+     *    / \             / \    / \
+     *  (a) (z)         (a) (b) (c) (d)
+     *      / \
+     *    (b) (c)
+     *
+     *  where:
+     *   a, b, c, d are roots of subtrees
+     *   deltaDepthBefore(x) = -2
+     *   deltaDepthBefore(y) = +1
+     *
+     *   deltaDepthAfter(x) = 0
+     *   deltaDepthAfter(y) = 0
+     *
+     * */
 
     Node *y = x->left;
     rotateLeft(y);
@@ -250,28 +250,28 @@ void AVLTree::rotateLeftRight(Node *x)
 
 void AVLTree::rotateRightLeft(Node *x)
 {
-     /*
-    *   Rotation schema (rotate rightLeft):
-    * 
-    *     BEFORE           AFTER
-    * 
-    *      (x)              ( z )
-    *      / \             /     \
-    *    (a) (y)   =>    (x)     (y)
-    *        / \         / \     / \ 
-    *      (z) (d)     (a) (b) (c) (d)
-    *      / \
-    *    (b) (c)
-    *
-    *  where:
-    *   a, b, c, d are roots of subtrees
-    *   deltaDepthBefore(x) = +2
-    *   deltaDepthBefore(y) = -1
-    * 
-    *   deltaDepthAfter(x) = 0
-    *   deltaDepthAfter(y) = 0
-    * 
-    * */
+    /*
+     *   Rotation schema (rotate rightLeft):
+     *
+     *     BEFORE           AFTER
+     *
+     *      (x)              ( z )
+     *      / \             /     \
+     *    (a) (y)   =>    (x)     (y)
+     *        / \         / \     / \
+     *      (z) (d)     (a) (b) (c) (d)
+     *      / \
+     *    (b) (c)
+     *
+     *  where:
+     *   a, b, c, d are roots of subtrees
+     *   deltaDepthBefore(x) = +2
+     *   deltaDepthBefore(y) = -1
+     *
+     *   deltaDepthAfter(x) = 0
+     *   deltaDepthAfter(y) = 0
+     *
+     * */
 
     Node *y = x->right;
     rotateRight(y);
